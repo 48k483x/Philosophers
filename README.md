@@ -8,7 +8,7 @@ The problem is illustrated by five philosophers who sit around a table and engag
 
 The simulation uses threads to represent the philosophers and mutexes for the forks to ensure mutual exclusion.
 
-![Dining Philosophers Illustration]([path_to_image_on_your_server](https://github.com/48k483x/Philosophers/blob/main/DALL%C2%B7E%202024-03-07%2010.51.42%20-%20Create%20a%20stark%20visualization%20of%20the%20dining%20philosophers'%20problem%2C%20emphasizing%20a%20strict%20observance%20of%20the%20rules%20governing%20resource%20sharing.%20Five%20philos.webp))
+![Dining Philosophers Illustration](https://github.com/48k483x/Philosophers/blob/main/DALL%C2%B7E%202024-03-07%2010.51.42%20-%20Create%20a%20stark%20visualization%20of%20the%20dining%20philosophers'%20problem%2C%20emphasizing%20a%20strict%20observance%20of%20the%20rules%20governing%20resource%20sharing.%20Five%20philos.jpg)
 
 ## Features
 
