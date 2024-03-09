@@ -8,7 +8,7 @@ The problem is illustrated by five philosophers who sit around a table and engag
 
 The simulation uses threads to represent the philosophers and mutexes for the forks to ensure mutual exclusion.
 
-![Dining Philosophers Illustration](philo.jpg)
+![Dining Philosophers Illustration](philoo.jpg)
 
 ## Features
 
