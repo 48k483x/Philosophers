@@ -1,4 +1,4 @@
-#include "philo.h"
+#include "../philo.h"
 
 char	***_parsed_av(int ac, char **av)
 {
