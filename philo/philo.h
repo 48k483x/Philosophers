@@ -11,6 +11,24 @@
 # include <stdbool.h>
 # include <limits.h>
 
+
+/*  Structs  */
+typedef struct s_philo
+{
+	pthread_t philo;
+	int tid;
+	int	philo_count;
+	int time_to_die;
+	int time_to_eat;
+	int time_to_sleep;
+	int eat_count;
+	int last_eat;
+	pthread_mutex_t *left_fork;
+	pthread_mutex_t *right_fork;
+	pthread_mutex_t *print;
+}   t_philo;
+
+
 /*  Errors Exit  */
 int  exit_with_message(char *message, char **av);
 

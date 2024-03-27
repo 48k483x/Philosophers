@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "philo.h": "c",
+        "system_error": "c",
+        "unistd.h": "c"
+    }
+}

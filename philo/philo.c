@@ -28,12 +28,7 @@ int main(int argc, char *argv[])
   tab = av_to_tab(ac, av);
   if (!input_check(ac, av, tab))
     return (exit_with_message("Usage: ./philo [args]", av));
-  int i = 0;
-  while (i < ac)
-  {
-    printf("%d\n", tab[i]);
-    i++;
-  }
+
   free_split(av);
   free(tab);
 }
