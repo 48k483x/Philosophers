@@ -34,9 +34,9 @@ typedef struct s_philo
     size_t start_time;
     int eat_times;
     int philos_num;
-    int *dead;
-    pthread_mutex_t r_fork;
-    pthread_mutex_t l_fork;
+    int *dead;;
+    pthread_mutex_t *r_fork;
+    pthread_mutex_t *l_fork;
     // pthread_mutex_t *write_lock;
     // pthread_mutex_t *dead_lock;
     // pthread_cond_t *meal_lock;
@@ -53,9 +53,9 @@ typedef struct s_prog
 typedef struct s_args
 {
     int philos_num;
-    int philos_eat_time;
-    int philos_sleep_time;
-    int philos_die_time;
+    int time_to_die;
+    int time_to_eat;
+    int time_to_sleep;
     int philos_eat_times;
 } t_args;
 
@@ -70,10 +70,12 @@ long get_time(void);
 
 // init functions
 bool init_args(t_args *args, char **av, int ac);
-bool init_philos(t_args *args, t_philo *philos);
+bool init_philos(t_args *args, t_philo *philos, pthread_mutex_t *forks);
+void init_forks(pthread_mutex_t *forks, t_philo *philos);
 
 // routine functions
-void eating(t_philo *philo);
+bool is_dead(t_philo *philo);
+bool eating(t_philo *philo);
 void sleeping(t_philo *philo);
 void thinking(t_philo *philo);
 void *philo_life(void *philo);
