@@ -57,10 +57,17 @@ bool init_philos(t_args *args, t_philo *philos, pthread_mutex_t *forks)
             return (exit_error("Error creating thread"));
         i++;
     }
-    i = 0;
-    while (pthread_join(philos[i].thread, NULL) != 0)
-        i++;
-
+    i = -1;
+	while (++i < args->philos_num)
+		pthread_join(philos[i].thread, NULL);
     return (true);
 }
 
+void detach_all(t_philo *philos)
+{
+	int i;
+
+	i = 0;
+	while (i < philos->philos_num)
+		pthread_detach(philos[i++].thread);
+}

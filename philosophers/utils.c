@@ -9,6 +9,11 @@ long get_time(void)
 
 }
 
+void	print(t_philo *philo, char *s)
+{
+	printf("%ld %d %s\n", get_time() - philo->start_time, philo->id, s);
+}
+
 int _isdigit(char c)
 {
     return (c >= '0' && c <= '9');

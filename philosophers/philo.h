@@ -34,7 +34,7 @@ typedef struct s_philo
     size_t start_time;
     int eat_times;
     int philos_num;
-    int *dead;;
+    int dead;
     pthread_mutex_t *r_fork;
     pthread_mutex_t *l_fork;
     // pthread_mutex_t *write_lock;
@@ -67,15 +67,17 @@ int _isdigit(char c);
 bool exit_error(char *s);
 bool is_digit(char **av);
 long get_time(void);
+void print(t_philo *philo, char *s);
 
 // init functions
 bool init_args(t_args *args, char **av, int ac);
 bool init_philos(t_args *args, t_philo *philos, pthread_mutex_t *forks);
 void init_forks(pthread_mutex_t *forks, t_philo *philos);
+void detach_all(t_philo *philos);
 
 // routine functions
 bool is_dead(t_philo *philo);
-bool eating(t_philo *philo);
+int eating(t_philo *philo);
 void sleeping(t_philo *philo);
 void thinking(t_philo *philo);
 void *philo_life(void *philo);
