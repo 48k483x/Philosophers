@@ -2,28 +2,35 @@
 
 bool is_dead(t_philo *philo)
 {
+    if (philo->philos_num == 1)
+    {
+            usleep(philo->phil_death_time * 1000);
+            print(philo, "died");
+            return (true);
+    }
     if (philo->eating)
     {
         if (philo->phil_eat_time > philo->phil_death_time)
         {
             usleep(philo->phil_death_time * 1000);
             print(philo, "died");
-            return (false);
+            return (true);
         }
         else if ((get_time() - philo->start_time) - philo->last_meal > philo->phil_death_time)
         {
             usleep(philo->phil_death_time * 1000);
             print(philo, "died");
-            return (false);
+            return (true);
         }
     }
 
-    return (true);
+    return (false);
 }
 
 int eating(t_philo *philo)
 {
     philo->eating = 1;
+    pthread_mutex_init(philo->meal_lock, NULL);
     if (philo->id % 2 == 0)
     {
         pthread_mutex_lock(philo->r_fork);
@@ -47,15 +54,18 @@ int eating(t_philo *philo)
     print(philo, "has taken a fork");
     print(philo, "is eating");
     usleep(philo->phil_eat_time * 1000);
+    pthread_mutex_lock(philo->meal_lock);
     philo->meals_eaten++;
-    if (!is_dead(philo))
+    philo->last_meal = get_time() - philo->start_time;
+    pthread_mutex_unlock(philo->meal_lock);
+    if (is_dead(philo))
 	{
-		printf("hello from routine eating\n");
-        return (50);
+        pthread_mutex_unlock(philo->l_fork);
+        pthread_mutex_unlock(philo->r_fork);
+        return (0);
 	}
     pthread_mutex_unlock(philo->l_fork);
     pthread_mutex_unlock(philo->r_fork);
-    philo->last_meal = get_time() - philo->start_time;
     if (philo->eat_times != -1 && philo->meals_eaten == philo->eat_times )
         philo->eat_times = 0;
     return (1);
@@ -79,19 +89,13 @@ void *philo_life(void *philo)
 
     while (1)
     {
-        int eatResult = eating(p);
-        printf("Eating result: %d\n", eatResult); // Debug line
-
-        if (eatResult == 50)
+        if (!eating(p))
         {
             detach_all(p);
-            p->dead = 1;
-            printf("hello\n");
             break ;
         }
         sleeping(p);
         thinking(p);
-        printf("Eat times: %d\n", p->eat_times); // Debug line
         if (p->eat_times == 0)
             break;
     }

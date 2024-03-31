@@ -17,6 +17,6 @@ int main(int ac, char **av)
     init_forks(forks, philos);
     if (!init_philos(&args, philos, forks))
         return (1);
-    // for(int i = 0; i < args.philos_num; i++)
-    //     print_philo(philos[i]);
+    for(int i = 0; i < args.philos_num; i++)
+        print_philo(philos[i]);
 }

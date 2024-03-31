@@ -48,7 +48,6 @@ bool init_philos(t_args *args, t_philo *philos, pthread_mutex_t *forks)
         philos[i].eat_times = args->philos_eat_times;
         philos[i].philos_num = args->philos_num;
         philos[i].dead = 0;
-        philos[i].l_fork = &forks[i];
         if (i == 0)
             philos[i].r_fork = &forks[args->philos_num - 1];
         else
