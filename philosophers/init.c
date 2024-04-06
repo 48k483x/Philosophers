@@ -30,6 +30,15 @@ void init_forks(pthread_mutex_t *forks, t_philo *philos)
         pthread_mutex_init(&forks[i++], NULL);
 }
 
+void init_prog(t_prog *prog, t_philo *philos)
+{
+    prog->death_flag = 0;
+    prog->philo = philos;
+    pthread_mutex_init(prog->dead_lock, NULL);
+    pthread_mutex_init(prog->meal_lock, NULL);
+    pthread_mutex_init(prog->write_lock, NULL);
+}
+
 bool init_philos(t_args *args, t_philo *philos, pthread_mutex_t *forks)
 {
     int i;
@@ -45,6 +54,7 @@ bool init_philos(t_args *args, t_philo *philos, pthread_mutex_t *forks)
         philos[i].phil_eat_time = args->time_to_eat;
         philos[i].phil_sleep_time = args->time_to_sleep;
         philos[i].start_time = get_time();
+        philos[i].last_meal = get_time();
         philos[i].eat_times = args->philos_eat_times;
         philos[i].philos_num = args->philos_num;
         philos[i].dead = 0;

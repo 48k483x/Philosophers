@@ -30,7 +30,6 @@ bool is_dead(t_philo *philo)
 int eating(t_philo *philo)
 {
     philo->eating = 1;
-    pthread_mutex_init(philo->meal_lock, NULL);
     if (philo->id % 2 == 0)
     {
         pthread_mutex_lock(philo->r_fork);
@@ -54,10 +53,8 @@ int eating(t_philo *philo)
     print(philo, "has taken a fork");
     print(philo, "is eating");
     usleep(philo->phil_eat_time * 1000);
-    pthread_mutex_lock(philo->meal_lock);
     philo->meals_eaten++;
     philo->last_meal = get_time() - philo->start_time;
-    pthread_mutex_unlock(philo->meal_lock);
     if (is_dead(philo))
 	{
         pthread_mutex_unlock(philo->l_fork);

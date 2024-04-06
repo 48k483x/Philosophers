@@ -11,7 +11,12 @@ long get_time(void)
 
 void	print(t_philo *philo, char *s)
 {
-	printf("%ld %d %s\n", get_time() - philo->start_time, philo->id, s);
+    size_t time;
+
+    pthread_mutex_lock(philo->write_lock);
+    time = get_time() - philo->start_time;
+	printf("%ld %d %s\n", time, philo->id, s);
+    pthread_mutex_unlock(philo->write_lock);
 }
 
 int _isdigit(char c)
