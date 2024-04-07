@@ -34,7 +34,7 @@ typedef struct s_philo
     size_t start_time;
     int eat_times;
     int philos_num;
-    int dead;
+    int *dead;
     pthread_mutex_t *r_fork;
     pthread_mutex_t *l_fork;
     pthread_mutex_t *write_lock;
@@ -77,7 +77,7 @@ void init_forks(pthread_mutex_t *forks, t_philo *philos);
 void detach_all(t_philo *philos);
 
 // routine functions
-bool is_dead(t_philo *philo);
+//bool is_dead(t_philo *philo);
 void eating(t_philo *philo);
 void sleeping(t_philo *philo);
 void thinking(t_philo *philo);

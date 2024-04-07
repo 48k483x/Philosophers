@@ -60,6 +60,7 @@ bool init_philos(t_args *args, t_philo *philos,t_prog *prog, pthread_mutex_t *fo
         philos[i].write_lock = &prog->write_lock;
         philos[i].dead_lock = &prog->dead_lock;
         philos[i].meal_lock = &prog->meal_lock;
+        philos[i].dead = &prog->death_flag;
         philos[i].dead = 0;
         philos[i].l_fork = &forks[i];
         if (i == 0)

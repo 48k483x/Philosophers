@@ -1,26 +1,5 @@
 #include "philo.h"
 
-bool is_dead(t_philo *philo)
-{
-    if (philo->eating)
-    {
-        if (philo->phil_eat_time > philo->phil_death_time)
-        {
-            usleep(philo->phil_death_time * 1000);
-            print(philo, "died");
-            return (false);
-        }
-        else if ((get_time() - philo->start_time) - philo->last_meal > philo->phil_death_time)
-        {
-            usleep(philo->phil_death_time * 1000);
-            print(philo, "died");
-            return (false);
-        }
-    }
-
-    return (true);
-}
-
 void eating(t_philo *philo)
 {
     pthread_mutex_lock(philo->r_fork);
