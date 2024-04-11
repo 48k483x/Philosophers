@@ -1,6 +1,6 @@
 NAME = philo
 FLAGS =  -g -Wall -Wextra -Werror -pthread
-SRC =  philo.c utils.c init.c outils_diali.c routine.c monitor.c
+SRC =  philo.c utils.c init.c routine.c monitor.c
 
 OBJ = $(SRC:.c=.o)
 
