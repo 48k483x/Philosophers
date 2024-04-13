@@ -6,6 +6,21 @@ bool	exit_error(char *s)
 	return (false);
 }
 
+bool	error(void)
+{
+	printf("\033[1;33m");
+	printf("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+	printf("┃            Please enter 4 or 5 arguments      ┃\n");
+	printf("┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n");
+	printf("┃             [\033[1;36m1\033[1;33m] Number of philosophers\n");
+	printf("┃             [\033[1;36m2\033[1;33m] Time to die\n");
+	printf("┃             [\033[1;36m3\033[1;33m] Time to eat\n");
+	printf("┃             [\033[1;36m4\033[1;33m] Time to sleep\n");
+	printf("┃             [\033[1;36m5\033[1;33m] Number of meals\n");
+	printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\033[0m\n");
+	return (false);
+}
+
 void	init_prog(t_philo *philos, t_prog *prog)
 {
 	prog->death_flag = 0;

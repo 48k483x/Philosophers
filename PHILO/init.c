@@ -3,9 +3,9 @@
 bool	init_args(t_args *args, char **av, int ac)
 {
 	if (ac < 5 || ac > 6)
-		return (exit_error("Usage: ./philo [args]"));
+		return (error());
 	if (!is_digit(av))
-		return (exit_error("Arguments must be digits"));
+		return (exit_error("Arguments must be digits || Positive nums"));
 	args->philos_num = _atoi(av[1]);
 	if (args->philos_num > PHILOS_MAX)
 		return (exit_error("Too many philosophers"));
@@ -14,6 +14,12 @@ bool	init_args(t_args *args, char **av, int ac)
 	args->time_to_die = _atoi(av[2]);
 	args->time_to_eat = _atoi(av[3]);
 	args->time_to_sleep = _atoi(av[4]);
+	if (args->time_to_die < 1)
+		return (exit_error("Time to die must be greater than 0"));
+	if (args->time_to_eat < 1)
+		return (exit_error("Time to eat must be greater than 0"));
+	if (args->time_to_sleep < 1)
+		return (exit_error("Time to sleep must be greater than 0"));
 	if (av[5])
 		args->philos_eat_times = _atoi(av[5]);
 	else

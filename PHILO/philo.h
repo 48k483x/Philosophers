@@ -63,6 +63,7 @@ typedef struct s_args
 
 // philo.c functions
 bool	exit_error(char *s);
+bool	error(void);
 void	init_prog(t_philo *philos, t_prog *prog);
 
 // utils.c functions
