@@ -78,7 +78,7 @@ int	ft_usleep(size_t milliseconds);
 bool	init_args(t_args *args, char **av, int ac);
 bool	init_philos(t_args *args, t_philo *philos,
 			t_prog *prog, pthread_mutex_t *forks);
-void	init_forks(pthread_mutex_t *forks, t_philo *philos);
+void	init_forks(pthread_mutex_t *forks, int philo_num);
 int		init_thread(t_philo *philos, pthread_mutex_t *forks, t_prog *prog);
 void	helper(int i, t_philo *philos, t_args *args, pthread_mutex_t *forks);
 void	init_prog(t_philo *philos, t_prog *prog);

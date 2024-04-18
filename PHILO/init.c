@@ -27,12 +27,12 @@ bool	init_args(t_args *args, char **av, int ac)
 	return (true);
 }
 
-void	init_forks(pthread_mutex_t *forks, t_philo *philos)
+void	init_forks(pthread_mutex_t *forks, int philo_num)
 {
 	int	i;
 
 	i = 0;
-	while (i < philos->philos_num)
+	while (i < philo_num)
 		pthread_mutex_init(&forks[i++], NULL);
 }
 

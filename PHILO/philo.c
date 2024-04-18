@@ -41,7 +41,7 @@ int	main(int ac, char **av)
 		return (error());
 	if (!init_args(&args, av, ac))
 		return (1);
-	init_forks(forks, philos);
+	init_forks(forks, _atoi(av[1]));
 	if (!init_philos(&args, philos, &prog, forks))
 		return (1);
 	if (!init_thread(philos, forks, &prog))
