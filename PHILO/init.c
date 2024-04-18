@@ -75,27 +75,62 @@ bool	init_philos(t_args *args, t_philo *philos,
 	return (true);
 }
 
-int	init_thread(t_philo *philos, pthread_mutex_t *forks, t_prog *prog)
-{
-	pthread_t	thread;
-	int			i;
+// int	init_thread(t_philo *philos, pthread_mutex_t *forks, t_prog *prog)
+// {
+// 	pthread_t	thread;
+// 	int			i;
 
-	if (pthread_create(&thread, NULL, &monitor, prog->philo) != 0)
-		destroy_all("Error creating thread", prog, forks, philos);
-	i = -1;
-	while (++i < philos->philos_num)
-	{
-		if (pthread_create(&philos[i].thread, NULL,
-				&philo_life, &philos[i]) != 0)
-			destroy_all("Error creating thread", prog, forks, philos);
-	}
-	if (pthread_join(thread, NULL) != 0)
-		destroy_all("Error joining thread", prog, forks, philos);
-	i = -1;
-	while (++i < philos->philos_num && prog->death_flag != 1)
-	{
-		if (pthread_join(philos[i].thread, NULL) != 0)
-			destroy_all("Error joining thread", prog, forks, philos);
-	}
-	return (0);
+// 	if (pthread_create(&thread, NULL, &monitor, prog->philo) != 0)
+// 		destroy_all("Error creating thread", prog, forks, philos);
+// 	i = -1;
+// 	while (++i < philos->philos_num)
+// 	{
+// 		if (pthread_create(&philos[i].thread, NULL,
+// 				&philo_life, &philos[i]) != 0)
+// 			destroy_all("Error creating thread", prog, forks, philos);
+// 	}
+// 	if (pthread_join(thread, NULL) != 0)
+// 		destroy_all("Error joining thread", prog, forks, philos);
+// 	i = -1;
+// 	while (++i < philos->philos_num && prog->death_flag != 1)
+// 	{
+// 		if (pthread_join(philos[i].thread, NULL) != 0)
+// 			destroy_all("Error joining thread", prog, forks, philos);
+// 	}
+// 	return (0);
+// }
+int init_thread(t_philo *philos, pthread_mutex_t *forks, t_prog *prog)
+{
+    pthread_t monitor_thread;
+    int i;
+
+    // Create monitor thread
+    if (pthread_create(&monitor_thread, NULL, &monitor, prog->philo) != 0)
+        destroy_all("Error creating monitor thread", prog, forks, philos);
+
+    // Create philosopher threads
+    for (i = 0; i < philos->philos_num; i++)
+    {
+        if (pthread_create(&philos[i].thread, NULL, &philo_life, &philos[i]) != 0)
+            destroy_all("Error creating philosopher thread", prog, forks, philos);
+    }
+
+    // Join monitor thread (when necessary)
+    // You may not need to join the monitor thread if it runs indefinitely
+    // Otherwise, join it before destroying resources
+    // if (pthread_join(monitor_thread, NULL) != 0)
+    //     destroy_all("Error joining monitor thread", prog, forks, philos);
+
+    // Join philosopher threads
+    for (i = 0; i < philos->philos_num; i++)
+    {
+        if (pthread_join(philos[i].thread, NULL) != 0)
+            destroy_all("Error joining philosopher thread", prog, forks, philos);
+    }
+
+    // Join monitor thread before exiting if necessary
+    if (pthread_join(monitor_thread, NULL) != 0)
+        destroy_all("Error joining monitor thread", prog, forks, philos);
+
+    return 0;
 }
