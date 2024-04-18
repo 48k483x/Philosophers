@@ -82,20 +82,22 @@ int	init_thread(t_philo *philos, pthread_mutex_t *forks, t_prog *prog)
 
 	if (pthread_create(&thread, NULL, &monitor, prog->philo) != 0)
 		destroy_all("Error creating thread", prog, forks, philos);
-	i = -1;
-	while (++i < philos->philos_num)
+	i = 0;
+	while (i < philos[0].philos_num)
 	{
 		if (pthread_create(&philos[i].thread, NULL,
 				&philo_life, &philos[i]) != 0)
 			destroy_all("Error creating thread", prog, forks, philos);
+		i++;
 	}
 	if (pthread_join(thread, NULL) != 0)
 		destroy_all("Error joining thread", prog, forks, philos);
-	i = -1;
-	while (++i < philos->philos_num && prog->death_flag != 1)
+	i = 0;
+	while (i < philos->philos_num)
 	{
 		if (pthread_join(philos[i].thread, NULL) != 0)
 			destroy_all("Error joining thread", prog, forks, philos);
+		i++;
 	}
 	return (0);
 }

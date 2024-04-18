@@ -63,7 +63,7 @@ typedef struct s_args
 
 // philo.c functions
 bool	exit_error(char *s);
-bool	error(void);
+int		error(void);
 void	init_prog(t_philo *philos, t_prog *prog);
 
 // utils.c functions
@@ -72,6 +72,7 @@ int		_isdigit(char c);
 bool	is_digit(char **av);
 long	get_time(void);
 void	print(t_philo *philo, char *s);
+int	ft_usleep(size_t milliseconds);
 
 // init functions
 bool	init_args(t_args *args, char **av, int ac);

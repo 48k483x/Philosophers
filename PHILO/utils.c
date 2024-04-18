@@ -14,7 +14,8 @@ void	print(t_philo *philo, char *s)
 
 	pthread_mutex_lock(philo->write_lock);
 	time = get_time() - philo->start_time;
-	printf("%ld %d %s\n", time, philo->id, s);
+	if (!dead_monitor(philo))
+		printf("%ld %d %s\n", time, philo->id, s);
 	pthread_mutex_unlock(philo->write_lock);
 }
 

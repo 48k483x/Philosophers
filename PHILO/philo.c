@@ -6,7 +6,7 @@ bool	exit_error(char *s)
 	return (false);
 }
 
-bool	error(void)
+int	error(void)
 {
 	printf("\033[1;33m");
 	printf("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
@@ -18,7 +18,7 @@ bool	error(void)
 	printf("┃             [\033[1;36m4\033[1;33m] Time to sleep\n");
 	printf("┃             [\033[1;36m5\033[1;33m] Number of meals\n");
 	printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\033[0m\n");
-	return (false);
+	return (0);
 }
 
 void	init_prog(t_philo *philos, t_prog *prog)
@@ -37,6 +37,8 @@ int	main(int ac, char **av)
 	t_prog			prog;
 	pthread_mutex_t	forks[PHILOS_MAX];
 
+	if (!(ac == 5 || ac == 6))
+		return (error());
 	if (!init_args(&args, av, ac))
 		return (1);
 	init_forks(forks, philos);

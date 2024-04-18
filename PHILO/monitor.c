@@ -8,8 +8,6 @@ int	destroy_all(char *mssg, t_prog *prog,
 	i = -1;
 	if (mssg)
 		printf("%s\n", mssg);
-	else
-		printf("Error\n");
 	pthread_mutex_destroy(&prog->meal_lock);
 	pthread_mutex_destroy(&prog->dead_lock);
 	pthread_mutex_destroy(&prog->write_lock);
