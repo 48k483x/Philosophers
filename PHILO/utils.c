@@ -68,3 +68,13 @@ bool	is_digit(char **av)
 	}
 	return (true);
 }
+
+int	ft_usleep(size_t milliseconds)
+{
+	size_t	start;
+
+	start = get_time();
+	while ((get_time() - start) < milliseconds)
+		usleep(500);
+	return (0);
+}
